@@ -5,7 +5,7 @@ export const baseConfig = {
   entryPoints: [
     {out: 'bundle', in: 'index.jsx'},
   ],
-  outdir: 'build',
+  outdir: 'docs',
   bundle: true,
   tsconfig: 'tsconfig.json',
   plugins: [
