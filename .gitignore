@@ -1,0 +1,14 @@
+node_modules/
+node_modules/.package-lock.json
+
+.idea/*
+!.idea/codeStyles
+!.idea/inspectionProfiles
+!.idea/jsLinters
+!.idea/stylesheetLinters
+!.idea/App.iml
+!.idea/compiler.xml
+!.idea/icon.svg
+!.idea/misc.xml
+!.idea/modules.xml
+!.idea/prettier.xml

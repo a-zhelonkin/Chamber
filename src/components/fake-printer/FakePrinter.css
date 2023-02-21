@@ -1,0 +1,16 @@
+.FakePrinter_root {
+    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+}
+
+.FakePrinter_root .page {
+    width: 21cm;
+    height: 29.7cm;
+}
