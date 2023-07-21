@@ -45483,16 +45483,16 @@
     Action2["Replace"] = "REPLACE";
   })(Action || (Action = {}));
   var PopStateEventType = "popstate";
-  function createBrowserHistory(options) {
+  function createHashHistory(options) {
     if (options === void 0) {
       options = {};
     }
-    function createBrowserLocation(window2, globalHistory) {
+    function createHashLocation(window2, globalHistory) {
       let {
-        pathname,
-        search,
-        hash
-      } = window2.location;
+        pathname = "/",
+        search = "",
+        hash = ""
+      } = parsePath(window2.location.hash.substr(1));
       return createLocation(
         "",
         {
@@ -45505,10 +45505,20 @@
         globalHistory.state && globalHistory.state.key || "default"
       );
     }
-    function createBrowserHref(window2, to) {
-      return typeof to === "string" ? to : createPath(to);
+    function createHashHref(window2, to) {
+      let base = window2.document.querySelector("base");
+      let href = "";
+      if (base && base.getAttribute("href")) {
+        let url = window2.location.href;
+        let hashIndex = url.indexOf("#");
+        href = hashIndex === -1 ? url : url.slice(0, hashIndex);
+      }
+      return href + "#" + (typeof to === "string" ? to : createPath(to));
     }
-    return getUrlBasedHistory(createBrowserLocation, createBrowserHref, null, options);
+    function validateHashLocation(location, to) {
+      warning(location.pathname.charAt(0) === "/", "relative pathnames are not supported in hash history.push(" + JSON.stringify(to) + ")");
+    }
+    return getUrlBasedHistory(createHashLocation, createHashHref, validateHashLocation, options);
   }
   function invariant(value, message) {
     if (value === false || value === null || typeof value === "undefined") {
@@ -46793,16 +46803,16 @@
   var _excluded3 = ["reloadDocument", "replace", "state", "method", "action", "onSubmit", "submit", "relative", "preventScrollReset"];
   var START_TRANSITION2 = "startTransition";
   var startTransitionImpl2 = React5[START_TRANSITION2];
-  function BrowserRouter(_ref) {
+  function HashRouter(_ref2) {
     let {
       basename,
       children,
       future,
       window: window2
-    } = _ref;
+    } = _ref2;
     let historyRef = React5.useRef();
     if (historyRef.current == null) {
-      historyRef.current = createBrowserHistory({
+      historyRef.current = createHashHistory({
         window: window2,
         v5Compat: true
       });
@@ -47258,7 +47268,7 @@
   if (container) {
     const root = import_client.default.createRoot(container);
     root.render(
-      /* @__PURE__ */ import_react4.default.createElement(BrowserRouter, null, /* @__PURE__ */ import_react4.default.createElement(Routes, null, /* @__PURE__ */ import_react4.default.createElement(Route, { path: "/printer", element: /* @__PURE__ */ import_react4.default.createElement(PrinterPage, null) }), /* @__PURE__ */ import_react4.default.createElement(Route, { path: "/dynamic-pricing", element: /* @__PURE__ */ import_react4.default.createElement(DynamicPricingPage, null) })))
+      /* @__PURE__ */ import_react4.default.createElement(HashRouter, null, /* @__PURE__ */ import_react4.default.createElement(Routes, null, /* @__PURE__ */ import_react4.default.createElement(Route, { path: "/printer", element: /* @__PURE__ */ import_react4.default.createElement(PrinterPage, null) }), /* @__PURE__ */ import_react4.default.createElement(Route, { path: "/dynamic-pricing", element: /* @__PURE__ */ import_react4.default.createElement(DynamicPricingPage, null) })))
     );
   }
 })();
