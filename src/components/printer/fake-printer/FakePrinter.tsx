@@ -1,4 +1,4 @@
-import './FakePrinter.css';
+import 'components/printer/fake-printer/FakePrinter.css';
 import React from 'react';
 
 interface Props {

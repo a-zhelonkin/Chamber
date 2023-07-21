@@ -1,8 +1,8 @@
-import {FakePrinter} from 'components/fake-printer/FakePrinter';
+import {FakePrinter} from 'components/printer/fake-printer/FakePrinter';
 import React from 'react';
-import './App.css';
+import './PrinterPage.css';
 
-export const App: React.FC = ({}) => {
+export const PrinterPage: React.FC = ({}) => {
   const [isPrinting, setPrinting] = React.useState(false);
 
   const onPrintClick = React.useCallback(() => {
